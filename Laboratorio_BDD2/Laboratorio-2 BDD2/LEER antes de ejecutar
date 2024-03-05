@@ -1,0 +1,2 @@
+Daniel, debido a que dependiendo de la versión del postgres aceptaba fechas con un formato o con otro, incluimos fechas invertidas por si te daba problemas.
+

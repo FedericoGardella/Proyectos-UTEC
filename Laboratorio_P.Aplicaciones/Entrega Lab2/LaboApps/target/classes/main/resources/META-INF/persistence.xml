@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="LabPA" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>logica.Departamento</class>
+		<class>logica.Proveedor</class>
+		<class>logica.Usuario</class>
+		<class>logica.Turista</class>
+		<class>logica.Paquete</class>
+		<class>logica.ActividadTuristica</class>
+		<class>logica.SalidaTuristica</class>
+		<class>logica.TuristaSalida</class>
+		<class>logica.PaqueteTurista</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/LabPA" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="Bobbyfischer1." />
+			<property name="javax.persistence.schema-generation.database.action" value="none" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

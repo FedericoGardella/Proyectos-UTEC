@@ -1,0 +1,327 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <libpq-fe.h>
+
+EXEC SQL BEGIN DECLARE SECTION;
+ short int employee_id;
+ char fechaHoy[11];
+ char user[20];
+ char contrasenia[20];
+ short int cont = 0;
+ char diasem[20];
+ char articulo[20];
+ int tangible;
+ float precio;
+ int id_articulo;
+ int cantidad;
+ float costo;
+ int stock;
+ char acceso[20];
+ int anio;
+ int mes;
+ float resultado;
+ char nombre_a[15];
+ int stock_a;
+ float precio_t;
+
+
+EXEC SQL END DECLARE SECTION;
+EXEC SQL WHENEVER SQLERROR SQLPRINT;
+EXEC SQL WHENEVER SQLWARNING SQLPRINT;
+EXEC SQL WHENEVER NOT FOUND SQLPRINT;
+
+
+
+void setearFecha() {
+    time_t t = time(NULL);
+    struct tm *fecha = localtime(&t);
+    sprintf(fechaHoy, "%02d.%02d.%04d", fecha->tm_mday, fecha->tm_mon + 1, fecha->tm_year + 1900);
+    printf("Fecha de hoy: %s\n", fechaHoy);
+}
+
+void setearDiaSem(){
+    time_t tiempo_actual;
+    struct tm *info_tiempo;
+    tiempo_actual = time(NULL);
+    info_tiempo = localtime(&tiempo_actual);
+    switch (info_tiempo->tm_wday) {
+        case 0:
+            strcpy(diasem, "Domingo");
+            break;
+        case 1:
+            strcpy(diasem, "Lunes");
+            break;
+        case 2:
+            strcpy(diasem, "Martes");
+            break;
+        case 3:
+            strcpy(diasem, "Miércoles");
+            break;
+        case 4:
+            strcpy(diasem, "Jueves");
+            break;
+        case 5:
+            strcpy(diasem, "Viernes");
+            break;
+        case 6:
+            strcpy(diasem, "Sábado");
+            break;
+    }
+    printf("Hoy es %s\n", diasem);
+}
+
+void loguearse(){
+    
+    printf("Ingrese su nombre de usuario: ");
+    scanf("%s",user);
+    printf("Ingrese su contrasenia: ");
+    scanf("%s",contrasenia);
+    system("clear");
+}
+
+void verificacionDeAcceso(){
+    int acceso1;
+    printf("Usuario no habilitado para venta de entradas\n");
+            printf("Volver al menu?\n");
+            printf("1.SI    2.NO, salir del sistema\n");
+            scanf("%d", &acceso1);
+            if(acceso1 == 1){
+                EXEC SQL commit;
+                system("clear");
+                }
+                else{ 
+                    system("clear");
+                    printf("\n\n\t\t\tSesion finalizada\n\n\n");
+                    exit(0);
+                    }
+}
+
+void EsNumero(int n) {
+    int elementosLeidos=0;
+
+    while (elementosLeidos>=1) {
+       // printf("entro al while\n");
+        elementosLeidos = scanf("%d",&n);
+       // printf("entro al while2\n");
+
+        if (elementosLeidos == 1) {
+          //  printf("entro al if\n");
+            break;
+        }
+        else {
+            printf("Entrada inválida. Intente nuevamente.\n");
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);//Limpia el búfer
+        }
+    }
+   
+}	
+
+int main(){
+    EXEC SQL CONNECT TO lab02@localhost:5432 USER postgres IDENTIFIED BY "postgres";
+    EXEC SQL SET autocommit = off;
+    system("clear");
+    setearFecha();
+    setearDiaSem();
+    bool logueado = false;
+    while (!logueado) {
+        loguearse();
+        EXEC SQL SELECT COUNT(*) INTO :cont FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        if (cont > 0){
+            system("clear");
+            printf("Logueo exitoso \n");
+            logueado = true;
+            EXEC SQL COMMIT;
+        }
+        else{
+            printf("Error de logueo, intente nuevamente \n\n\n");
+        }
+    }
+    int elegir;
+    int mayor;
+    
+
+    while(1){
+        
+        setearFecha();
+        setearDiaSem();
+        printf("\n\n\t\tMenu\n");
+        printf("\t--------------------\n\n");
+        printf("1. Vender entrada\n");
+        printf("2. Vender articulo\n");
+        printf("3. Crear articulo\n");
+        printf("4. Realizar reposicion\n");
+        printf("5. Obtener recaudacion\n");
+        printf("6. Salir\n\n\n");
+        printf("Elija su opcion :  ");
+        scanf("%d",&elegir);
+       
+        EsNumero(elegir);
+        if(elegir == 1){
+          EXEC SQL BEGIN TRANSACTION;
+          
+      	  printf("Verificacion en curso...\n");
+            EXEC SQL SELECT rol INTO :acceso FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        	if(strcmp(acceso,"entradas") != 0 && strcmp(acceso,"director") != 0){
+                verificacionDeAcceso();		     
+         	}   
+            else{
+                    printf("El visitante es mayor de edad?\n");
+                    printf("Escriba 1 afirmativo, 0 negativo\n");     
+                    scanf("%d", &mayor);
+                if (mayor == 1 ){
+                    EXEC SQL SELECT monto INTO :precio FROM articulos AS U WHERE U.id_articulo = 1;
+                    system("clear");
+                    printf("\tCobrar %.2f pesos y presione Enter para volver al Menu\n\n\n",precio);
+                    getchar();
+                    getchar(); 
+                    EXEC SQL INSERT INTO visitantes (fecha, dia_sem, pago, nom_usuario, id_articulo) VALUES (now(), :diasem, true, :user, 1 );
+                    EXEC SQL UPDATE articulos SET stock = stock-1 WHERE articulos.nombre = 'Sticker';
+                    EXEC SQL commit;
+                    system("clear");
+                    
+                }
+                if (mayor == 0 ){
+                    printf("\t\tEntrada sin costo realizada, presione Enter para volver al Menu\n\n\n");
+                    getchar();
+                    getchar(); 
+                    EXEC SQL INSERT INTO visitantes (fecha, dia_sem, pago, nom_usuario, id_articulo) VALUES (now(), :diasem, false, :user, 1 );
+                    EXEC SQL UPDATE articulos SET stock = stock-1 WHERE articulos.nombre = 'Sticker';
+                    EXEC SQL COMMIT;
+                    system("clear");
+                }
+		    }EXEC SQL ROLLBACK;
+		}
+        if(elegir == 2){
+            EXEC SQL BEGIN TRANSACTION;
+            printf("Verificacion en curso...\n");
+            EXEC SQL SELECT rol INTO :acceso FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        	if(strcmp(acceso,"recuerdos") != 0 && strcmp(acceso,"director") != 0){
+               	verificacionDeAcceso();     
+         	} 
+            else{
+                printf("Introduzca ID del articulo a vender (comienza desde el 3)\n");
+                scanf("%d",&id_articulo);
+                EsNumero(id_articulo);
+                if(id_articulo != 1 && id_articulo != 2){
+                    EXEC SQL SELECT articulos.nombre INTO :nombre_a FROM articulos WHERE articulos.id_articulo = :id_articulo;
+                    EXEC SQL SELECT articulos.stock INTO :stock FROM articulos WHERE articulos.id_articulo = :id_articulo;
+                    printf("Introduzca la cantidad de unidades\n");
+                    scanf("%d",&cantidad);
+                    if (cantidad > stock){
+                        printf("\t\tNo se dispone del stock suficiente, presione Enter para volver al Menu\n\n\n");
+                        getchar();
+                        getchar();
+                        system("clear");
+                    }
+                    else{   
+                        EXEC SQL SET TRANSACTION ISOLATION LEVEL READ COMMITTED READ WRITE;
+                        EXEC SQL SELECT monto INTO :precio FROM articulos AS U WHERE U.id_articulo = :id_articulo;
+                        precio_t = precio * cantidad;
+                        EXEC SQL INSERT INTO mov_art_sti (cantidad, repos, fecha, id_articulo, nom_usuario) VALUES (:cantidad, false, now(),:id_articulo, :user);
+                        EXEC SQL UPDATE articulos SET stock = stock-:cantidad WHERE articulos.id_articulo = :id_articulo;
+                        system("clear");
+                        printf("\t\nCobre %.2f y presione Enter para volver al Menu\n",precio_t);
+                        printf("\t\t\n Articulo vendido: %s\n Precio unitario: %.2f\n Cantidad:%d\n Monto total de venta: %.2f\n\n",nombre_a, precio,cantidad, precio_t);
+                        getchar();
+                        getchar();
+                        system("clear");
+                        EXEC SQL COMMIT; //Confirmo tarnsaccion
+                        }
+                    }
+                    else {
+                        printf("\t\nEl numero del articulo no puede ser ni 1 ni 2\n\n");   
+                    } 
+                }EXEC SQL ROLLBACK; //Si no llega al commit que haga rollback
+        } 
+         
+        if(elegir == 3){
+            EXEC SQL BEGIN TRANSACTION;
+            printf("Verificacion en curso...\n");
+            EXEC SQL SELECT rol INTO :acceso FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        	if(strcmp(acceso,"recuerdos") != 0 && strcmp(acceso,"director") != 0){
+               	verificacionDeAcceso();
+         	}   
+            else{
+               //EXEC SQL BEGIN TRANSACTION;
+                EXEC SQL SET TRANSACTION ISOLATION LEVEL READ COMMITTED READ WRITE;
+                printf("Introduzca el nombre del nuevo articulo\n");
+                scanf("%s",articulo);
+                printf("Escriba 1 en caso de ser un articulo tangible, 0 en caso contrario\n");
+                scanf("%d",&tangible);
+                printf("Ingrese el precio de venta del articulo\n");
+                scanf("%f",&precio);
+                EXEC SQL INSERT INTO articulos (monto, stock, tangible, nombre) VALUES (:precio, 0, :tangible, :articulo);
+                EXEC SQL COMMIT;
+                system("clear");
+                printf("\t\tAlta de articulo realizada\n\n");
+                printf("\tArticulo: %s\n \tPrecio: %.2f\n\nPresione Enter para volver al Menu\n\n\n",articulo, precio);
+                getchar();
+                getchar();
+                system("clear");
+            }EXEC SQL ROLLBACK;
+        }    
+        if(elegir == 4){
+            EXEC SQL BEGIN TRANSACTION;
+            printf("Verificacion en curso...\n");
+            EXEC SQL SELECT rol INTO :acceso FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        	if(strcmp(acceso,"recuerdos") != 0 && strcmp(acceso,"director") != 0){
+               	verificacionDeAcceso();
+         	}   
+            else{
+               // EXEC SQL BEGIN TRANSACTION;
+                system("clear");
+                printf("Introduzca ID del articulo a reponer\n");
+                scanf("%d",&id_articulo);
+                EXEC SQL SELECT articulos.nombre INTO :nombre_a FROM articulos WHERE articulos.id_articulo = :id_articulo;
+                printf("\tArticulo: %s\n\n ", nombre_a);
+                printf("Introduzca la cantidad de stock a reponer\n");
+                scanf("%d",&cantidad);
+                printf("Indique el costo de reposicion del articulo\n");
+                scanf("%f",&costo);
+                EXEC SQL SELECT articulos.stock INTO :stock_a FROM articulos WHERE articulos.id_articulo = :id_articulo;
+                EXEC SQL SET TRANSACTION ISOLATION LEVEL READ COMMITTED READ WRITE;
+                EXEC SQL INSERT INTO mov_art_sti (cantidad, costo, repos, fecha, id_articulo, nom_usuario) VALUES (:cantidad, :costo, true, now(), :id_articulo, :user);
+                EXEC SQL UPDATE articulos SET stock = stock+:cantidad WHERE articulos.id_articulo = :id_articulo;
+                EXEC SQL SELECT articulos.stock INTO :stock_a FROM articulos WHERE articulos.id_articulo = :id_articulo;
+                EXEC SQL COMMIT;
+                system("clear");
+                printf("\tReposicion de articulo realizada, presione Enter para volver al Menu\n\n\n");
+                printf("\t\tArticulo: %s\n \t\tReposicion: %d\n \t\tStock actualizado:%d \n \t\tCosto de la reposición: %.2f\n\n", nombre_a, cantidad, stock_a,costo);//COMPLETAR
+                getchar();
+                getchar();
+                system("clear");
+            }EXEC SQL ROLLBACK;
+        }    
+        if(elegir == 5){
+            printf("Verificacion en curso...\n");
+            EXEC SQL SELECT rol INTO :acceso FROM usuarios AS U WHERE U.nom_usuario = :user AND U.contrasenia = :contrasenia;
+        	if(strcmp(acceso,"director") != 0){
+               verificacionDeAcceso();
+         	}
+            else{
+                printf("Ingrese año\n");
+                scanf("%d",&anio);
+                printf("Ingrese mes\n");
+                scanf("%d",&mes);
+
+                EXEC SQL SELECT recaudacion(:anio, :mes) INTO :resultado;
+                EXEC SQL COMMIT;
+                system("clear");
+
+                printf("\n\t\tLa recaudación total del año %d, mes %d es: %.2f\n\n", anio, mes, resultado);
+                getchar();
+                system("clear");
+            }
+               
+        }
+        if(elegir == 6){
+            system("clear");
+            printf("\n\n\t\t\tSesion finalizada\n\n\n");
+            exit(0);
+        }
+    }
+    return 0;
+}

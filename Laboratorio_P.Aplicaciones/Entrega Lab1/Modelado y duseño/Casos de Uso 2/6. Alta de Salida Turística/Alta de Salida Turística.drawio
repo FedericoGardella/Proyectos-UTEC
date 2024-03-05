@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net" modified="2023-08-16T23:56:49.128Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="4SOIqmT6cW7tD8s0nKB1" version="21.6.8" type="google">
+  <diagram name="Página-1" id="jUuQ-yivEAkDQYrqy-Nv">
+    <mxGraphModel grid="1" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-5" value="d:&lt;u&gt;Departamento&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="420" y="699" width="120" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-9" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="870" y="709.8" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-10" value=":&lt;u&gt;ActividadTuristica&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="860" y="699.8" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-11" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2rc9sKHvx5bH_LAvUkcn-5" target="2rc9sKHvx5bH_LAvUkcn-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="721" as="sourcePoint" />
+            <mxPoint x="760" y="589.8" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-12" value="1.1: at := find(nombreAct)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="590" y="693" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="668" y="693" as="sourcePoint" />
+            <mxPoint x="728" y="693" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-29" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="988" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-36" value="at:&lt;u&gt;ActividadTuristica&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="850" y="837" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-40" value=":&lt;u&gt;SalidaTuristica&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="838" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-41" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="2rc9sKHvx5bH_LAvUkcn-36" target="2rc9sKHvx5bH_LAvUkcn-40">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1040" y="888" as="sourcePoint" />
+            <mxPoint x="1090" y="838" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-42" value="1.2.1: st := create(datos)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1016" y="830" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-43" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1125" y="830" as="sourcePoint" />
+            <mxPoint x="1185" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-44" value=":&lt;u&gt;SalidaTuristica&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="978" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-45" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;entryX=0.888;entryY=0.977;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="2rc9sKHvx5bH_LAvUkcn-44" target="2rc9sKHvx5bH_LAvUkcn-36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1200" y="968" as="sourcePoint" />
+            <mxPoint x="1250" y="918" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="992" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-46" value="1.2.2: add(st)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="972" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-47" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1120" y="972" as="sourcePoint" />
+            <mxPoint x="1180" y="972" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-58" value=":&lt;u&gt;Sistema&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="700" width="120" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-59" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="2rc9sKHvx5bH_LAvUkcn-58">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-520" y="722" as="sourcePoint" />
+            <mxPoint x="-90" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-60" value="confirmarAltaSalTur(nombreAct: String, datos: DTSalidaTuristica)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="-640" y="693" width="510" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-61" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-330.5" y="693" as="sourcePoint" />
+            <mxPoint x="-270.5" y="693" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-62" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2rc9sKHvx5bH_LAvUkcn-58" target="2rc9sKHvx5bH_LAvUkcn-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="800" as="sourcePoint" />
+            <mxPoint x="430" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-63" value="1. confirmarAltaSalTur(nombreAct,datos)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="693" width="341" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2rc9sKHvx5bH_LAvUkcn-64" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=0.367;entryY=0.067;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="162" y="694" as="sourcePoint" />
+            <mxPoint x="217.14699999999993" y="695.01" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s0MMDKp_dja9BBz7sC_m-1" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="2rc9sKHvx5bH_LAvUkcn-36" target="2rc9sKHvx5bH_LAvUkcn-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="790" y="1040" as="sourcePoint" />
+            <mxPoint x="840" y="990" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="859" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s0MMDKp_dja9BBz7sC_m-2" value="1.2: crearSalida(datos)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="830" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s0MMDKp_dja9BBz7sC_m-3" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="655" y="829" as="sourcePoint" />
+            <mxPoint x="715" y="829" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

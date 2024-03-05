@@ -1,0 +1,2 @@
+LaboApps contiene la capa logica desarrollada mayormente en el Laboratorio 1 mas los tests unitarios.
+pruebaPA contiene el front, servlets, servidor, etc.

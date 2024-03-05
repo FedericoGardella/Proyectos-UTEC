@@ -1,0 +1,19 @@
+SELECT p.nombre, indice_rotacion_stock FROM
+
+(SELECT precio, costo_total / valor_promedio_existencias AS indice_rotacion_stock
+FROM (
+	SELECT m.id_precio as precio, SUM(r.costo * v.cantidad) AS costo_total, AVG(m.stock) AS valor_promedio_existencias
+	FROM mov_art_sti m
+	JOIN reposiciones r ON r.id_movas = m.id_movas
+	JOIN (
+    	SELECT nombre, COUNT(*) AS cantidad
+    	FROM mov_art_sti mo
+		JOIN reposiciones re ON re.id_movas = mo.id_movas
+		WHERE re.fecha >= '2020-01-01' AND re.fecha <= '2023-12-31' --El indice se suele calcular en el peridodo de un año
+    	GROUP BY nombre												--pero mejor ilustración será en 3 en este ejemplo
+	) AS v ON m.nombre = v.nombre	
+	WHERE r.fecha >= '2020-01-01' AND r.fecha <= '2023-12-31'
+	GROUP BY m.id_precio
+) AS subquery) AS s
+
+JOIN precios p ON p.id_precio = s.precio;
